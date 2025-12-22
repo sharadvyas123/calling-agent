@@ -1,16 +1,21 @@
 from flask import Flask, Response
 from twilio.twiml.voice_response import VoiceResponse
+from my_agent.utils.llm import generate_agent_response
 
 app = Flask(__name__)
 
-@app.route("/voice", methods=["POST", "GET"])
+@app.route("/voice", methods=["POST"])
 def voice():
+    # For now, simulated user input
+    user_text = "I really like your product"
+
+    ai_text = generate_agent_response(user_text)
+
     resp = VoiceResponse()
-    resp.say(
-        "Hello I am from XYZ company. This call is successful.",
-        voice="alice"
-    )
+    resp.say(ai_text, voice="alice", language="en-IN")
+
     return Response(str(resp), mimetype="text/xml")
+
 
 @app.route("/")
 def home():
