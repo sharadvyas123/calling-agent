@@ -1,32 +1,45 @@
-from flask import Flask, request, Response, session
+from flask import Flask, request, Response
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from my_agent.utils.llm import generate_agent_response
 
 app = Flask(__name__)
-app.secret_key = "super-secret-key"  # required for session
+
+
+CALL_MEMORY = {}
+COMPLETED_CALLS= {}
 
 
 @app.route("/incoming-call", methods=["POST"])
 def incoming_call():
     resp = VoiceResponse()
 
-    # Initialize memory if not present
-    if "messages" not in session:
-        session["messages"] = [
+    call_sid = request.form.get("CallSid")
+    # # Initialize memory if not present
+    if call_sid not in CALL_MEMORY:
+        CALL_MEMORY[call_sid] = [
             {
-                "role": "system",
-                "content": "You are a helpful AI assistant talking on a phone call."
-            },
-            {
-                "role": "assistant",
-                "content": "Hello! How can I help you today?"
+                "role" : "assistant",
+                "content" :"Hello! How can I help you today?"
             }
         ]
         resp.say("Hello! How can I help you today?", voice="alice", language="en-IN")
 
+
+    # if "messages" not in session:
+    #     session["messages"] = [
+    #         {
+    #             "role": "system",
+    #             "content": "You are a helpful AI assistant talking on a phone call."
+    #         },
+    #         {
+    #             "role": "assistant",
+    #             "content": "Hello! How can I help you today?"
+    #         }
+    #     ] not using the session cause we need the convo for the summary 
+
     gather = Gather(
         input="speech",
-        speech_timeout="auto",
+        speech_timeout=0.8,
         enhanced=True,
         action="/respond",
         method="POST"
@@ -41,7 +54,7 @@ def incoming_call():
 @app.route("/respond", methods=["POST"])
 def respond():
     user_text = request.form.get("SpeechResult")
-
+    call_sid = request.form.get("CallSid")
     if not user_text:
         resp = VoiceResponse()
         resp.say("Sorry, I didn't catch that. Please repeat.", voice="alice")
@@ -49,7 +62,7 @@ def respond():
         return Response(str(resp), mimetype="text/xml")
 
     # Load memory
-    messages = session.get("messages", [])
+    messages = CALL_MEMORY.get(call_sid, [])
 
     # Append user message
     messages.append({
@@ -67,7 +80,7 @@ def respond():
     })
 
     # Save back to session
-    session["messages"] = messages
+    CALL_MEMORY[call_sid] = messages
 
     resp = VoiceResponse()
     resp.say(ai_text, voice="alice", language="en-IN")
@@ -76,6 +89,36 @@ def respond():
     resp.redirect("/incoming-call", method="POST")
 
     return Response(str(resp), mimetype="text/xml")
+
+
+@app.route("/call-ended", methods=["POST"])
+def call_ended():
+    call_sid = request.form.get("CallSid")
+    call_status = request.form.get("CallStatus")
+
+    if call_status != "completed":
+        return "", 200
+
+    messages = CALL_MEMORY.pop(call_sid, [])
+
+
+    print("CALL ENDED:", call_sid)
+    print("CONVERSATION:")
+    for m in messages:
+        print(f"{m['role'].upper()}: {m['content']}")
+
+    # Optionally store it in another in-memory dict
+    COMPLETED_CALLS[call_sid] = messages
+
+    return "", 200
+
+
+@app.route("/conversations/<call_sid>")
+def get_conversation(call_sid):
+    return {
+        "call_sid": call_sid,
+        "messages": COMPLETED_CALLS.get(call_sid, [])
+    }
 
 
 @app.route("/")
