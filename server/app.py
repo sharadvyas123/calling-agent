@@ -118,7 +118,7 @@ def get_conversation(call_sid):
     return {
         "call_sid": call_sid,
         "messages": COMPLETED_CALLS.get(call_sid, [])
-    }
+    } , 200
 
 
 @app.route("/")
