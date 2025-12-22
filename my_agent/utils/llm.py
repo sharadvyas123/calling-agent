@@ -50,6 +50,3 @@ def generate_agent_response(messages: list[dict]) -> str:
     response.raise_for_status()
 
     return response.json()["response"].strip()
-
-
-print(generate_agent_response("Hello my name is sam !!"))
