@@ -1,0 +1,50 @@
+Starting workflow for: +91-My-Number
+Workflow completed
+Final action: None
+Sentiment: neutral
+
+{
+    'phone': '+91-MY-Number',
+    'Conversation':
+        [...] 
+    'report':
+    " --- Conversation ---
+    Agent: Hello this is Vaani calling from XYZ company for your recent activity at our company's product can i ask you something
+    Customer: Yes, you can ask me.
+    Agent: Sure, thank you for your prompt response! I was hoping to understand a bit more about your experience with our product. Could you 
+    please tell me which specific service you used during your last interaction? This will help us tailor our conversation and ensure we address
+     any questions or concerns you might have.
+    Customer: I recently used your uh scalable web service platform where you are providing me 1 server for uh free and I used it for my 1 web 
+    service applications where I hosted my back end in Python. And I like that service, very much. Great and glad you asked me, uh, and I also 
+    wanted to tell you 1 suggestion. If I can
+    Agent: Hello there! Thank you for taking the time to share your experience with us. It's great to hear that you found our Scalable Web 
+    Service Platform useful and enjoyed using it for your Python-based web service applications.
+    I appreciate your willingness to offer suggestions. Please go ahead and tell me about your idea, so we can consider it for potential 
+    improvements in the future. While I don't have the ability to make immediate changes during our conversation, rest assured that your 
+    feedback will be carefully reviewed by our development team.
+    If you have any other questions or concerns about our services, feel free to share them with me now. Otherwise, I'll be happy to follow 
+    up with you soon regarding your suggestion and keep you updated on any developments. Thank you once again for reaching out!
+    Customer: Okay. So my idea was like, you can uh, you're in education on platform, but kind of hard, so I suggest that it's uh, it will be 
+    make more sense if there was much AI, guidance or any type of guidance uh or documentation that can help me to navigate. Because I found 
+    some difficulty to some that which is config and uh some uh changes if I need to make it and uh otherwise I don't have any concern, I feel 
+    very great for that service.
+    Agent: Hello there! Thank you for sharing your valuable feedback about our platform's education section and the need for more AI-driven 
+    guidance or documentation to enhance navigation. We greatly appreciate your suggestions and will certainly consider them during our ongoing 
+    efforts to improve the user experience.
+    Our development team is constantly working on updates and improvements, so rest assured that your ideas are being taken into account. In the 
+    meantime, we encourage you to explore our help center or community forum, where you might find some useful resources to assist with 
+    navigating and configuring our services. If you encounter any specific issues in the future, please don't hesitate to reach out, and I'll be
+     happy to assist or escalate your concern as needed.
+    Once again, thank you for reaching out and sharing your thoughts. We appreciate your continued support, and we look forward to providing an 
+    even better experience for you in the future!
+    --- User Tone ---
+    The user was cooperative, polite, and open during the conversation. They were willing to share their positive experiences as well as 
+    constructive suggestions for improvement.
+    --- User Emotion ---
+    Based on their words and tone, it appears that the user felt satisfied with the service they received but experienced some difficulty 
+    navigating the educational resources provided. They expressed enthusiasm about suggesting potential improvements and seemed pleased when 
+    their feedback was welcomed.",
+    'sentiment': 'neutral',
+    'engagement': 'medium',
+    'needs_escalation': False
+}

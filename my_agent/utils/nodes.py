@@ -1,11 +1,13 @@
-from state import CallState
-from tools import call_user
+from my_agent.utils.state import CallState
+from my_agent.utils.tools import call_user
 import time
 import requests
 import json
 import ollama
 
-client = ollama.Client()
+client = ollama.Client(
+    host="http://localhost:11434"
+)
 MODEL_NAME = "mistral"
 
 def wait_for_conversation(call_sid, timeout=300):
@@ -136,7 +138,7 @@ RULES:
             "needs_escalation": False,
             "reasoning": "Failed to parse evaluation"
         }
-        
+
     return {
     "sentiment": eval_data["sentiment"],
     "engagement": eval_data["engagement"],
