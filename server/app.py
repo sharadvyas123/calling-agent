@@ -18,11 +18,15 @@ def incoming_call():
     if call_sid not in CALL_MEMORY:
         CALL_MEMORY[call_sid] = [
             {
+                "role" : "system",
+                "content" :"You are a helpfull calling assistant which follows the System prompt given above"
+            },
+            {
                 "role" : "assistant",
-                "content" :"Hello! How can I help you today?"
+                "content" :"Hello this is Vaani calling from XYZ company for your recent activity at our company's product can i ask you something "
             }
         ]
-        resp.say("Hello! How can I help you today?", voice="alice", language="en-IN")
+        resp.say("Hello this is Vaani calling from XYZ company for your recent activity at our company's product can i ask you something ", voice="alice", language="en-IN")
 
 
     # if "messages" not in session:
@@ -33,7 +37,7 @@ def incoming_call():
     #         },
     #         {
     #             "role": "assistant",
-    #             "content": "Hello! How can I help you today?"
+    #             "content": "Hello this is Vaani calling from XYZ company for your recent activity at our company's product can i ask you something "
     #         }
     #     ] not using the session cause we need the convo for the summary 
 
@@ -45,7 +49,7 @@ def incoming_call():
         method="POST"
     )
 
-    gather.say("I am listening.", voice="alice", language="en-IN")
+    # gather.say("I am listening.", voice="alice", language="en-IN")
     resp.append(gather)
 
     return Response(str(resp), mimetype="text/xml")
