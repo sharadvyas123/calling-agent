@@ -1,6 +1,6 @@
 import requests
 
-OLLAMA_URL = "https://6d16eb565963.ngrok-free.app/api/generate"
+OLLAMA_URL = "https://f1b191b42a0b.ngrok-free.app/api/generate"
 MODEL = "mistral"
 
 SYSTEM_PROMPT = """
