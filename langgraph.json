@@ -1,0 +1,9 @@
+{
+  "name": "vaani-caller-agent",
+  "version": "0.1.0",
+  "description": "AI-powered calling agent that collects and analyzes customer feedback using LangGraph, Twilio, and Ollama",
+  "entrypoint": "my_agent/agent.py",
+  "state": "my_agent.utils.state.CallState",
+  "runtime": "python",
+  "framework": "langgraph"
+}

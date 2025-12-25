@@ -1,9 +1,13 @@
 [project]
-name = "ai-calling-agent"
+name = "vaani-caller-agent"
 version = "0.1.0"
+description = "AI calling agent that collects and analyzes customer feedback using Twilio, LangGraph, and Ollama"
+requires-python = ">=3.10"
 dependencies = [
   "flask",
   "twilio",
   "langgraph",
-  "gunicorn"
+  "gunicorn",
+  "requests",
+  "python-dotenv"
 ]
